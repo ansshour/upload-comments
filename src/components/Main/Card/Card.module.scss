@@ -1,0 +1,26 @@
+@import "../../../variables.scss";
+
+.container {
+    width: 90%;
+    box-shadow: $shadow;
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    border: 1px solid lightgray;
+}
+
+.name {
+    margin-bottom: 10px;
+}
+
+.photo {
+    border-radius: 50%;
+}
+
+.firstEl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid lightgray;
+    padding-right: 20px;
+}

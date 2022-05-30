@@ -2,6 +2,8 @@
 
 $blue: #0C0032;
 $bg-gray: f1eded;
+$red: red;
+
 
 body {
   margin: 0;
@@ -9,6 +11,8 @@ body {
   font-family: 'JetBrains Mono', monospace;
   background-color: $bg-gray;
   color: black;
+  box-sizing: border-box;
+  font-size: 20px;
 }
 
 p {
@@ -23,4 +27,32 @@ input {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+
+p {
+  margin: 0;
+}
+
+input {
+  all: unset;
+}
+
+input {
+  border: 1px solid lightgray;
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+input:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #bdbdbd;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+}
+
+label {
+  font-size: 20px;
+  margin-bottom: 5px;
 }

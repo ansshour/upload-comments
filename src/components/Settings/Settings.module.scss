@@ -1,0 +1,17 @@
+form {
+    width: 60%;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+
+        &:first-child {
+            margin: 0;
+        }
+    }
+}
+
+.container {
+    padding: 5px;
+}
