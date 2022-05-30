@@ -5,18 +5,43 @@ import styles from "./Main.module.scss"
 
 export const Main = ({ dataForResponse }) => {
 
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
+    const [offset, setOffset] = useState(0);
 
-    // useEffect(() => {
-    //     // axios.get(`http://localhost:4000/getcomments?token=${dataForResponse.token}?groupid=${dataForResponse.groupid}?topicid=${dataForResponse.topicid}`)
-    //     //     .then(data => setData(data))
-    //     axios.get(`http://localhost:4000/getcomments?token=affcbe28affcbe28affcbe28f1af8093d3aaffcaffcbe28cda5eec549103f80693eb82a?groupid=91324690?topicid=32070492`)
-    //         .then(data => console.log(data))
-    // }, [])
+
+    useEffect(() => {
+        if (dataForResponse.token.length === 0) {
+            dataForResponse.token = localStorage.getItem("token");
+        }
+        if (dataForResponse.groupid.length === 0) {
+            dataForResponse.groupid = localStorage.getItem("groupid");
+        }
+        if (dataForResponse.topicid.length === 0) {
+            dataForResponse.topicid = localStorage.getItem("topicid");
+        }
+        axios.post("http://localhost:4000/getcomments", {
+            dataForResponse,
+            offset
+        }).then((response => {
+            const data = []
+            const items = response.data.response.items;
+            const profiles = response.data.response.profiles;
+            items.forEach(item => {
+                profiles.forEach(profile => {
+                    if (item.from_id === profile.id) {
+                        const dataObj = { name: `${profile.first_name} ${profile.last_name}`, photo: profile.photo_100, profileLink: `https://vk.com/id${profile.id}`, commentText: item.text }
+                        data.push(dataObj)
+                    }
+                })
+            })
+            setData(data)
+        }))
+            .catch(err => console.log("error"))
+    }, [])
 
     return (
         <div className={styles.card__container}>
-            <Card />
+            {data.map(data => <Card name={data.name} photo={data.photo} commentText={data.commentText} profileLink={data.profileLink} />)}
         </div>
     )
 }

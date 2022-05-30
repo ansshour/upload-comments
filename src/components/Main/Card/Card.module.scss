@@ -4,9 +4,9 @@
     width: 90%;
     box-shadow: $shadow;
     padding: 10px;
-    display: flex;
     gap: 20px;
-    border: 1px solid lightgray;
+    border-radius: $b-radius;
+    margin-bottom: 20px;
 }
 
 .name {
@@ -21,6 +21,5 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-right: 1px solid lightgray;
     padding-right: 20px;
 }
