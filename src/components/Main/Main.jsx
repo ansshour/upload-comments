@@ -18,9 +18,9 @@ export const Main = ({ dataForResponse }) => {
     let id = new Date().valueOf();
 
     const deleteEl = (id) => {
-        let newData = data;
+        let newData = comments;
         newData = newData.filter(data => data.id !== id);
-        setData(newData)
+        setComments(newData)
     }
 
     useEffect(() => {
@@ -82,14 +82,10 @@ export const Main = ({ dataForResponse }) => {
     return (
         <div>
             <div className={styles.card__container}>
-                {(data.map(data => <Card name={data.name} photo={data.photo} commentText={data.commentText} key={data.id} profileLink={data.profileLink} id={data.id} deleteEl={deleteEl} />))}
+                {(comments.map(data => <Card name={data.name} photo={data.photo} commentText={data.commentText} key={data.id} profileLink={data.profileLink} id={data.id} deleteEl={deleteEl} />))}
                 <Stack spacing={2} style={{ marginBottom: "20px" }}>
                     <Pagination count={parseInt(localStorage.getItem("numbersOfComments") / 100)} shape="rounded" onChange={(_, num) => setOffset(num * 100)} page={offset === 0 ? 1 : Math.round(offset / 100)} />
                 </Stack>
-            </div>
-            <div className={styles.saveData}>
-                <div><AiOutlineSave size="25px" /><p className="save">Сохранить данные</p></div>
-                <div><AiOutlineCloudDownload size="25px" /><p className="download">Выгрузить данные</p></div>
             </div>
         </div>
     )
