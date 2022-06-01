@@ -19,7 +19,7 @@ export const Settings = ({ states }) => {
                 </div>
                 <div className={styles.topicId}>
                     <label>Количество сообщений в обсуждении:</label>
-                    <input type="text" name="numbersOfComments" placeholder="1000" value={states.numbersOfComments || localStorage.getItem("numbersOfComments")} onChange={(e) => { states.setNumbersOfComments(e.target.value); localStorage.setItem("numbersOfComments", e.target.value) }} />
+                    <input type="text" name="numbersOfComments" placeholder="1000" value={localStorage.getItem("numbersOfComments")} onChange={(e) => {states.setNumbersOfComments(e.target.value); localStorage.setItem("numbersOfComments", e.target.value); states.setIsOffsetChanged(true) }} />
                 </div>
             </form>
         </div>

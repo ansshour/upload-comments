@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import variables from "./variables.scss"
 import styles from "./App.module.scss"
 import { AiOutlineDatabase, AiOutlineSetting } from "react-icons/ai";
@@ -13,15 +13,30 @@ export function App() {
   const [groupid, setGroupid] = useState("");
   const [topicid, setTopicid] = useState("");
   const [numbersOfComments, setNumbersOfComments] = useState("");
+  const [isOffsetChanged, setIsOffsetChanged] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false)
 
 
-  const states = { token, setToken, groupid, setGroupid, topicid, setTopicid, numbersOfComments, setNumbersOfComments }
-  const dataForResponse = { token, groupid, topicid, numbersOfComments }
+  const states = { token, setToken, groupid, setGroupid, topicid, setTopicid, numbersOfComments, setNumbersOfComments, setIsOffsetChanged }
+  const dataForResponse = { token, groupid, topicid, numbersOfComments, isOffsetChanged }
+
+  useEffect(() => {
+    document.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    })
+
+  }, [])
+
+  //className={isScrolled ? `${styles.main} ${styles.scrolled2}` : `${styles.main}`}
 
   return (
     <BrowserRouter>
       <div className={styles.container}>
-        <div className={styles.settings}>
+        <div className={isScrolled ? `${styles.settings} ${styles.scrolled}` : `${styles.settings}`}>
           <ul>
             <Link to="/"><li><AiOutlineDatabase size="25px" /><p>Данные</p></li></Link>
             <Link to="/settings"><li><AiOutlineSetting size="25px" /><p>Настройки</p></li></Link>

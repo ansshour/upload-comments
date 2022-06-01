@@ -9,6 +9,9 @@
 .settings {
     background-color: $dark-gray;
     color: $text-color;
+    transition: all 0.5s, width 0.3s;
+    width: 100%;
+    overflow: hidden;
 
     ul {
         list-style-type: none;
@@ -25,6 +28,7 @@
             display: flex;
             padding: 10px 5px;
             transition: background-color .1s;
+            position: relative;
 
             &:hover {
                 background-color: #494e53;
@@ -40,4 +44,16 @@
 a {
     color: $text-color;
     text-decoration: none;
+}
+
+.scrolled {
+    transform: translateX(-100%);
+}
+
+.scrolled2 {
+    width: 100vw;
+}
+
+.main {
+    transition: 10s;
 }
