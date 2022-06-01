@@ -13,5 +13,8 @@ form {
 }
 
 .container {
-    padding: 5px;
+    padding: 10px 15px;
+    display: flex;;
+    box-sizing: border-box;
+    height: 100%;
 }

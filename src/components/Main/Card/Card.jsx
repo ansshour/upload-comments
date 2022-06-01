@@ -6,9 +6,9 @@ export const Card = ({ name, photo, commentText, profileLink, deleteEl, id }) =>
 
     return (
         <div className={styles.container}>
-            <span className={styles.x} onClick={() => {deleteEl(id)}}><BiX /></span>
+            <span className={styles.x} onClick={(e) => {deleteEl(id, e)}}><BiX /></span>
             <div className={styles.firstEl}>
-                <a href={profileLink}><img className={styles.photo} src={photo} width="100px" target="_blank" /></a>
+                <a href={profileLink} target="_blank" ><img className={styles.photo} src={photo} width="100px"/></a>
                 <p className={styles.name}>Имя: {name}</p>
             </div>
             <div>
