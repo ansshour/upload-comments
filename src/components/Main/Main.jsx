@@ -14,13 +14,18 @@ export const Main = ({ dataForResponse }) => {
     const [data, setData] = useState([]);
     const [offset, setOffset] = useState(0);
     const [loading, setLoading] = useState(false);
-    const { comments, setComments } = useContext(CommentsContext)
+    const { comments, setComments, page, setPage } = useContext(CommentsContext)
     let id = new Date().valueOf();
 
     const deleteEl = (id) => {
         let newData = comments;
         newData = newData.filter(data => data.id !== id);
         setComments(newData)
+    }
+
+    const pageFunc = () => {
+        //page={offset === 0 ? 1 : Math.round(offset / 100)}
+        offset === 0 ? setPage(1) : setPage(Math.round(offset/100))
     }
 
     useEffect(() => {
@@ -68,7 +73,10 @@ export const Main = ({ dataForResponse }) => {
                 .catch(err => console.log("error"))
         }
         getData(offset)
+        pageFunc()
     }, [offset])
+
+
 
 
     if (loading) {
@@ -84,7 +92,7 @@ export const Main = ({ dataForResponse }) => {
             <div className={styles.card__container}>
                 {(comments.map(data => <Card name={data.name} photo={data.photo} commentText={data.commentText} key={data.id} profileLink={data.profileLink} id={data.id} deleteEl={deleteEl} />))}
                 <Stack spacing={2} style={{ marginBottom: "20px" }}>
-                    <Pagination count={parseInt(localStorage.getItem("numbersOfComments") / 100)} shape="rounded" onChange={(_, num) => setOffset(num * 100)} page={offset === 0 ? 1 : Math.round(offset / 100)} />
+                    <Pagination count={parseInt(localStorage.getItem("numbersOfComments") / 100)} shape="rounded" onChange={(_, num) => setOffset(num * 100)} page={page} />
                 </Stack>
             </div>
         </div>
